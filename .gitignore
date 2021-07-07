@@ -1,2 +1,4 @@
-node_modules
+node_modules/
 .babelrc
+/node_modules
+config.js
