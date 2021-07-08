@@ -2,8 +2,23 @@ body{
   text-align: center;
 }
 
+.teams {
+  margin: 30px;
+  border: solid black;
+}
 
-.matchesForUser{
-  border-style: solid;
-  margin: 10px;
+div#loser {
+  color: red;
+}
+
+div#winner {
+  color: green;
+}
+
+.summonerName {
+  text-align: right;
+}
+
+button {
+  margin-left: 20px;
 }

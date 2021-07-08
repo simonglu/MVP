@@ -8,6 +8,7 @@ class MatchHistory extends React.Component {
       currentPlayerSearched: '',
       currentPlayerMatchIDs: [],
       currentPlayerMatches: [],
+      currentlyShowing: []
     };
 
     this.playerInfo = this.playerInfo.bind(this);
@@ -37,40 +38,38 @@ class MatchHistory extends React.Component {
   }
 
   individualMatch() {
-    var nextMatch = this.state.currentPlayerMatchIDs[0];
-    axios.get('/individualMatch', { params: { individualMatch: nextMatch } })
-    .then((response)=> {
-      this.setState({
-        currentPlayerMatches: this.state.currentPlayerMatches.concat(response.data.info.participants)
-      })
-      console.log(response.data.info.participants);
-    })
-  }
-
-  loadMoreMatches() {
-    var nextMatch = this.state.currentPlayerMatchIDs[0];
-    axios.get('/individualMatch', { params: { individualMatch: nextMatch } })
-    .then((response)=> {
-      this.setState({
-        currentPlayerMatches: this.state.currentPlayerMatches.push([response.data.info.participants])
-      })
-      console.log(response.data.info.participants);
-    })
+    for (var i = 0; i < 2; i++) {
+      var nextMatch = this.state.currentPlayerMatchIDs[i];
+      axios.get('/individualMatch', { params: { individualMatch: nextMatch } })
+        .then((response) => {
+          this.setState({
+            currentPlayerMatches: this.state.currentPlayerMatches.concat([response.data.info.participants])
+          })
+        })
+    }
   }
 
   render() {
     return (
-      <div id ='MatchHistory'>
+      <div id='MatchHistory'>
         <input type='text' placeholder='Enter a username' id='userSearch'></input>
-        <button type='submit' onClick={this.playerInfo}>Click</button>
-        <button type = 'test' onClick = {this.loadMoreMatches}></button>
+        <button type='submit' onClick={() => { this.playerInfo() }}>Click</button>
         <div className='matchesForUser'>
-          {this.state.currentPlayerMatches.map((element)=>
-          element.summonerName.toLowerCase() === this.state.currentPlayerSearched.name.toLowerCase() ?
-          console.log('true') :
-          console.log('false'))}
+            {this.state.currentPlayerMatches.map((element) =>
+              <div className ='teams'>
+                {element.map((e) =>
+                <div>
+                  {e.win === true?
+                  <div id='winner' className='summonerName'>
+                    {e.summonerName}
+                    </div> :
+                  <div id='loser' className='summonerName'>
+                    {e.summonerName}
+                    </div>}
+                </div>)}
+              </div>)}
+          </div>
         </div>
-      </div>
     );
   }
 }
