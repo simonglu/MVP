@@ -22,10 +22,22 @@ app.post('/playerInfo', (req, res) => {
   });
 })
 
-app.get('/matchInfo', (req, res) => {
+app.post('/matches', (req, res) => {
   var puuid = req.body.puuid;
   axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=20`, {headers: { "X-Riot-Token": APIToken.TOKEN }})
   .then((response) => {
+    res.send(response.data);
+  })
+  .catch((err)=> {
+    res.send(404);
+  });
+})
+
+app.get('/individualMatch', (req, res) => {
+  var matchId = req.query.individualMatch;
+  axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/${matchId}`, {headers: { "X-Riot-Token": APIToken.TOKEN }})
+  .then((response) => {
+    console.log(response.data);
     res.send(response.data);
   })
   .catch((err)=> {
