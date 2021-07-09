@@ -105,7 +105,7 @@ class MatchHistory extends React.Component {
                 <div className= 'summonersInGame'>
                   {e.win === true ?
                     <div id='winner' className='summonerName'>
-                      <div className='inGameName'>{e.summonerName} </div>
+                      <div className='inGameName'>{e.summonerName + ' (' + e.championName + ') '} </div>
                       <div className='statLine'>
                       {' K: ' + ' ' + e.kills + ' D: ' + e.deaths + ' A:' + e.assists}
                       <div className='damage'>{`Total damage Dealt: ${e.totalDamageDealt} Total Damage Taken: ${e.totalDamageTaken}`}</div>
@@ -129,7 +129,7 @@ class MatchHistory extends React.Component {
                       <img src={this.fetchChampionIcon(e.championName)} class='championName' onClick={()=>{this.championInfo(e.championName)}}></img>
                     </div> :
                     <div id='loser' className='summonerName'>
-                       <div className='inGameName'>{e.summonerName} </div>
+                       <div className='inGameName'>{e.summonerName + ' (' + e.championName + ') '} </div>
                       <div className='statLine'>
                       {' K: ' + ' ' + e.kills + ' D: ' + e.deaths + ' A:' + e.assists}
                       <div className='damage'>{`Total damage Dealt: ${e.totalDamageDealt} Total Damage Taken: ${e.totalDamageTaken}`}</div>

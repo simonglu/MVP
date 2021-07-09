@@ -82,3 +82,8 @@ img.items:hover, .championName:hover {
 .damage {
   float: right;
 }
+
+#addFavorite {
+  margin: 10px;
+}
+

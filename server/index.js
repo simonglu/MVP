@@ -5,6 +5,8 @@ const morgan = require('morgan')
 let app = express();
 
 
+var pool = require('../database/database.js');
+
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.use(express.urlencoded({ extended: false }));
@@ -45,7 +47,40 @@ app.get('/individualMatch', (req, res) => {
   });
 })
 
+app.get('/favoritesList', (req, res) => {
+  pool.query(`SELECT * FROM favoriteplayers;`, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send(404);
+    }
+    console.log(result.rows);
+    res.send(result.rows);
+  });
+});
 
+app.post('/newFavorite', (req, res) => {
+  var userToBeAdded = req.body.username;
+  pool.query(`INSERT INTO favoritePlayers (username) VALUES ('${userToBeAdded}');`, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send(404);
+    }
+    res.send(200);
+  });
+});
+
+app.post('/removeFavorite', (req, res) => {
+  var userToBeDeleted = req.body.username;
+  console.log(userToBeDeleted);
+  pool.query(`DELETE FROM favoriteplayers
+              WHERE username = '${userToBeDeleted}';`, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send(404);
+    }
+    res.send(200);
+  });
+});
 
 
 let PORT = process.env.PORT || 3000;
