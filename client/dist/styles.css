@@ -1,5 +1,6 @@
 body{
-  text-align: center;
+  text-align: left;
+  font-family: sans-serif;
 }
 
 .teams {
@@ -15,10 +16,69 @@ div#winner {
   color: green;
 }
 
-.summonerName {
-  text-align: right;
+h1, .Search {
+  margin-left: 30px;
 }
 
-button {
-  margin-left: 20px;
+.summonerName {
+  text-align: left;
+}
+
+h2#FavoritesList {
+  text-align: left;
+}
+
+.favoritePlayers {
+  margin-top: 20px;
+}
+
+#submitButton, #remove {
+    margin-left: 20px;
+    font-size: medium;
+    height: 25px;
+    width: 100px;
+    background-color: rgba(255, 255, 255, 0.555);
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+
+.App {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+h2#currentlySearchedSummonerName{
+  float:right;
+  visibility: hidden;
+  margin-right: 30px;
+}
+
+.summonerName {
+  margin: 10px
+}
+
+img.items:hover, .championName:hover {
+  opacity: 50%;
+  cursor: pointer;
+}
+
+.allItems {
+  float: right;
+}
+
+.summonersInGame {
+  margin-bottom: 30px;
+}
+
+.championName {
+  width: 64px;
+  margin-top: -20px;
+}
+
+.inGameName, .statLine {
+  font-weight: bold;
+}
+
+.damage {
+  float: right;
 }
